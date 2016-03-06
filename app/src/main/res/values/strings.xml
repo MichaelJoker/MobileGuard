@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">手机卫士</string>
+    <string name="title_activity_setup3">SetupActivity3</string>
+    <string name="sample_device_admin_description">设备管理器一键锁屏,清除数据等等</string>
+    <string name="sample_device_admin">设备管理器</string>
+</resources>
