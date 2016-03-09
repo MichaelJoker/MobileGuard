@@ -21,6 +21,11 @@ import android.widget.Toast;
 import com.paper.mobileguard.R;
 import com.paper.mobileguard.utils.MD5Utils;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,6 +48,11 @@ public class MainActivity extends AppCompatActivity {
         gvHome = (GridView) findViewById(R.id.gv_home);
         gvHome.setAdapter(new HomeAdapter());
 
+        copyDB("address.db");// 拷贝归属地查询数据库
+
+
+
+
         // 设置监听
         gvHome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -52,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         // 手机防盗
                         showPasswordDialog();
+                        break;
+                    case 7:
+                        // 高级工具
+                        startActivity(new Intent(MainActivity.this,
+                                AToolsActivity.class));
                         break;
                     default:
                         break;
@@ -123,6 +138,54 @@ public class MainActivity extends AppCompatActivity {
         });
 
         dialog.show();
+    }
+
+
+   /* *
+     * 拷贝数据库
+   */
+
+    private void copyDB(String dbName) {
+         /*File filesDir = getFilesDir();
+         System.out.println("路径:" + filesDir.getAbsolutePath());*/
+        File destFile = new File(getFilesDir(), dbName);// 要拷贝的目标地址
+
+        try{
+            InputStream in = getAssets().open(dbName);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+
+        if (destFile.exists()) {
+            System.out.println("数据库" + dbName + "已存在!");
+            return;
+        }
+
+        FileOutputStream out = null;
+        InputStream in = null;
+
+        try {
+            in = getAssets().open(dbName);
+            out = new FileOutputStream(destFile);
+
+            int len = 0;
+            byte[] buffer = new byte[1024];
+
+            while ((len = in.read(buffer)) != -1) {
+                out.write(buffer, 0, len);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                in.close();
+                out.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
