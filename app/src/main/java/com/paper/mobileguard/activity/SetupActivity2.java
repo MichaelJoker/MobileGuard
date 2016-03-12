@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
+
 import com.paper.mobileguard.R;
-import com.paper.mobileguard.view.SettingItemView;
+
 
 
 /**
@@ -15,14 +17,14 @@ import com.paper.mobileguard.view.SettingItemView;
  */
 public class SetupActivity2 extends BaseSetupActivity {
 
-    private SettingItemView sivSim;
+    private CheckBox sivSim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup2);
 
-        sivSim = (SettingItemView) findViewById(R.id.siv_sim);
+        sivSim = (CheckBox)findViewById(R.id.siv_sim);
 
         String sim = mPref.getString("sim", null);
         if (!TextUtils.isEmpty(sim)) {

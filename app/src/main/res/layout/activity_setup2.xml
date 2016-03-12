@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:itheima="http://schemas.android.com/apk/com.paper.mobileguard"
     android:orientation="vertical">
 
     <TextView
@@ -21,14 +20,26 @@
         style="@style/ContentStyle"
         android:text="就会发送报警短信" />
 
-    <com.paper.mobileguard.view.SettingItemView
+    <!--<com.paper.mobileguard.view.SettingItemView
         android:id="@+id/siv_sim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         itheima:title="点击绑定sim卡"
         itheima:desc_off="sim卡没有绑定"
         itheima:desc_on="sim卡已经绑定"
-         />
+         />-->
+
+    <CheckBox
+        android:id="@+id/siv_sim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="点击绑定sim卡"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:textSize="20sp"
+        android:focusableInTouchMode="false" />
+
 
 
     <RelativeLayout

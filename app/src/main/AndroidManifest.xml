@@ -64,7 +64,12 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.AddressActivity"/>
+        <activity android:name=".activity.AddressActivity" />
+
+        <service
+            android:name=".service.AddressService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
