@@ -63,6 +63,11 @@ public class MainActivity extends AppCompatActivity {
                         // 手机防盗
                         showPasswordDialog();
                         break;
+                    case 1:
+                        // 通讯卫士
+                        startActivity(new Intent(MainActivity.this,
+                                CallSafeActivity.class));
+                        break;
                     case 7:
                         // 高级工具
                         startActivity(new Intent(MainActivity.this,

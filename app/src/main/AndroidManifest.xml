@@ -69,7 +69,10 @@
         <service
             android:name=".service.AddressService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".activity.CallSafeActivity" />
+        <activity android:name=".activity.CallSafeActivity2"/>
     </application>
 
 </manifest>
