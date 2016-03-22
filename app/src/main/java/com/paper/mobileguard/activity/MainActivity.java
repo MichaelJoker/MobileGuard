@@ -66,7 +66,12 @@ public class MainActivity extends AppCompatActivity {
                     case 1:
                         // 通讯卫士
                         startActivity(new Intent(MainActivity.this,
-                                CallSafeActivity.class));
+                                CallSafeActivity2.class));
+                        break;
+                    case 2:
+                        // 软件管理
+                        startActivity(new Intent(MainActivity.this,
+                                AppManagerActivity.class));
                         break;
                     case 7:
                         // 高级工具

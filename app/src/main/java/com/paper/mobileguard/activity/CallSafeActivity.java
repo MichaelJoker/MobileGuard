@@ -41,7 +41,7 @@ public class CallSafeActivity extends AppCompatActivity {
     private List<BlackNumberInfo> blackNumberInfos;
     private LinearLayout ll_pb;
     private BlackNumberDao dao;
-    private CallSafeAdapter adapter;
+    public  CallSafeAdapter adapter;
     private TextView tv_page_numbeer;
     private EditText et_page_number;
 
@@ -71,9 +71,10 @@ public class CallSafeActivity extends AppCompatActivity {
 
             et_page_number.setText("" + mCurrentPageNumber);
 
-            tv_page_numbeer.setText("/"+totalPage);
-            CallSafeAdapter adapter = new CallSafeAdapter(blackNumberInfos,CallSafeActivity.this);
+            tv_page_numbeer.setText("/" + totalPage);
+            adapter = new CallSafeAdapter(blackNumberInfos,CallSafeActivity.this);
             list_view.setAdapter(adapter);
+
         }
     };
 
@@ -117,24 +118,37 @@ public class CallSafeActivity extends AppCompatActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             if (convertView == null) {
+
                 convertView = View.inflate(CallSafeActivity.this, R.layout.item_call_safe, null);
                 holder = new ViewHolder();
                 holder.tv_number = (TextView) convertView.findViewById(R.id.tv_number);
                 holder.tv_mode = (TextView) convertView.findViewById(R.id.tv_mode);
                 holder.iv_delete = (ImageView) convertView.findViewById(R.id.iv_delete);
-
                 convertView.setTag(holder);
-            } else {
-                holder = (ViewHolder) convertView.getTag();
-            }
+
+            } else { holder = (ViewHolder) convertView.getTag();}
+
             holder.tv_number.setText(lists.get(position).getNumber());
             String mode = lists.get(position).getMode();
-            if (mode.equals("1")) {
+           /* if (mode.equals("1")) {
                 holder.tv_mode.setText("来电拦截+短信");
             } else if (mode.equals("2")) {
                 holder.tv_mode.setText("电话拦截");
             } else if (mode.equals("3")) {
                 holder.tv_mode.setText("短信拦截");
+            }*/
+
+            switch (mode){
+                case "1":
+                    holder.tv_mode.setText("来电拦截+短信");
+                    break;
+                case "2":
+                    holder.tv_mode.setText("电话拦截");
+                    break;
+                case "3":
+                    holder.tv_mode.setText("短信拦截");
+                    break;
+
             }
 
 
@@ -147,8 +161,10 @@ public class CallSafeActivity extends AppCompatActivity {
                     if (result) {
                         Toast.makeText(CallSafeActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                         lists.remove(info);
-                       /* //刷新界面
-                        adapter.notifyDataSetChanged();*/
+
+                        //刷新界面
+                        adapter.notifyDataSetChanged();
+
                     } else {
                         Toast.makeText(CallSafeActivity.this, "删除失败", Toast.LENGTH_SHORT).show();
                     }
@@ -180,7 +196,9 @@ public class CallSafeActivity extends AppCompatActivity {
 
     /*下一页*/
     public void nextPage(View view){
+
         if(mCurrentPageNumber>=totalPage){
+
             Toast.makeText(CallSafeActivity.this, "已经是最后一页了", Toast.LENGTH_SHORT).show();
             return;
         }
