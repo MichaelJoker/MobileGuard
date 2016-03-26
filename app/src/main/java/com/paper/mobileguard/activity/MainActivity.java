@@ -73,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(MainActivity.this,
                                 AppManagerActivity.class));
                         break;
+                    case 3:
+                        // 进程管理
+                        startActivity(new Intent(MainActivity.this,
+                               TaskManagerActivity.class));
+                        break;
                     case 7:
                         // 高级工具
                         startActivity(new Intent(MainActivity.this,

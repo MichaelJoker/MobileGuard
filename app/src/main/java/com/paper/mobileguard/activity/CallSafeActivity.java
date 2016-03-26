@@ -1,36 +1,23 @@
 package com.paper.mobileguard.activity;
 
 import android.support.v7.app.AppCompatActivity;
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
-import android.widget.Adapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.paper.mobileguard.R;
 import com.paper.mobileguard.adapter.MyBaseAdapter;
-import com.paper.mobileguard.bean.BlackNumberInfo;
+import com.paper.mobileguard.domain.BlackNumberInfo;
 import com.paper.mobileguard.db.dao.BlackNumberDao;
 
 import java.util.List;
