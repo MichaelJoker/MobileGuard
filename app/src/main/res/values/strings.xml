@@ -3,4 +3,7 @@
     <string name="title_activity_setup3">SetupActivity3</string>
     <string name="sample_device_admin_description">设备管理器一键锁屏,清除数据等等</string>
     <string name="sample_device_admin">设备管理器</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

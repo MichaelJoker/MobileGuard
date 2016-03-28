@@ -22,6 +22,34 @@
         android:textColor="@color/black"
         android:textSize="20sp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:clickable="true"
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:drawablePadding="20dp"
+        android:gravity="center_vertical"
+        android:onClick="appLock"
+        android:padding="10dp"
+        android:text="程序锁"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:clickable="true"
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:drawablePadding="20dp"
+        android:gravity="center_vertical"
+        android:onClick="blackListQuery"
+        android:padding="10dp"
+        android:text="黑名单拦截"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
 
 
 
