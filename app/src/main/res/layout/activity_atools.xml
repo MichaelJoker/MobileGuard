@@ -50,6 +50,19 @@
         android:textColor="@color/black"
         android:textSize="20sp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:clickable="true"
+        android:drawableLeft="@android:drawable/ic_menu_camera"
+        android:drawablePadding="20dp"
+        android:gravity="center_vertical"
+        android:onClick="appLock2"
+        android:padding="10dp"
+        android:text="程序锁开关"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
 
 
 
