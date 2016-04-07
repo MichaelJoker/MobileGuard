@@ -65,7 +65,6 @@
         android:onClick="reEnter"
         android:clickable="true"
         android:layout_marginRight="5dp"
-        android:background="@drawable/ripple_bg"
         android:text="重新进入设置向导" />
 
     <ImageView

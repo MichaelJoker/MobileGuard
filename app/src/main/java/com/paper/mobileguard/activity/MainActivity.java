@@ -1,11 +1,17 @@
 package com.paper.mobileguard.activity;
 
+
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -16,10 +22,12 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 
 import com.paper.mobileguard.R;
 import com.paper.mobileguard.utils.MD5Utils;
+import com.paper.mobileguard.utils.PasswordUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,7 +35,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     private GridView gvHome;
     private String[] names = { "手机防盗", "通讯卫士", "软件管家", "进程管理", "流量统计", "手机杀毒",
@@ -37,21 +45,26 @@ public class MainActivity extends AppCompatActivity {
             ,R.drawable.power};
 
     private SharedPreferences mPref;
+    private Toolbar toolbar;
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initToolBar();
 
         mPref = getSharedPreferences("config", MODE_PRIVATE);
 
         gvHome = (GridView) findViewById(R.id.gv_home);
         gvHome.setAdapter(new HomeAdapter());
 
+        //toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+
         copyDB("address.db");// 拷贝归属地查询数据库
-
-
-
 
         // 设置监听
         gvHome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,7 +101,70 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
+
+    /**
+     * 初始化toolbar
+     */
+    private void initToolBar() {
+        android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbar);
+        // App Logo
+//        toolbar.setLogo(R.mipmap.logo);
+        // Title
+//        toolbar.setTitle("WaKaKa");
+        // Sub Title
+//        toolbar.setSubtitle("Sub title");
+//        toolbar.setOverflowIcon(getResources().getDrawable((R.mipmap.more));
+        setSupportActionBar(toolbar);
+
+        //导航按钮
+        toolbar.setNavigationIcon(R.mipmap.menu);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Click navigation", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        toolbar.setOnMenuItemClickListener(new android.support.v7.widget.Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                String msg = "";
+                switch (item.getItemId()) {
+                   /* case R.id.action_delete:
+                        msg += "Click delete";
+                        break;*/
+                    case R.id.action_about:
+                        msg += "Click about";
+                        break;
+                    case R.id.action_settings:
+                        startActivity(new Intent(MainActivity.this,SettingActivity.class));
+                        break;
+                }
+                if (!msg.equals("")) {
+                    Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+    }
+
+    /**
+     * 加载toobar中的菜单项
+     *
+
+     *
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // 为ActionBar扩展菜单项
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.base_toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
 
     /**
      * 显示密码弹窗
@@ -156,57 +232,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-   /* *
-     * 拷贝数据库
-   */
-
-    private void copyDB(String dbName) {
-         /*File filesDir = getFilesDir();
-         System.out.println("路径:" + filesDir.getAbsolutePath());*/
-        File destFile = new File(getFilesDir(), dbName);// 要拷贝的目标地址
-
-        try{
-            InputStream in = getAssets().open(dbName);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-
-
-        if (destFile.exists()) {
-            System.out.println("数据库" + dbName + "已存在!");
-            return;
-        }
-
-        FileOutputStream out = null;
-        InputStream in = null;
-
-        try {
-            in = getAssets().open(dbName);
-            out = new FileOutputStream(destFile);
-
-            int len = 0;
-            byte[] buffer = new byte[1024];
-
-            while ((len = in.read(buffer)) != -1) {
-                out.write(buffer, 0, len);
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                in.close();
-                out.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
     /**
      * 设置密码弹窗
      */
-    private void showPasswordSetDailog(){
+    public void showPasswordSetDailog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final AlertDialog dialog = builder.create();
 
@@ -255,6 +285,53 @@ public class MainActivity extends AppCompatActivity {
 
         dialog.show();
     }
+
+    //拷贝数据库
+
+
+    private void copyDB(String dbName) {
+         /*File filesDir = getFilesDir();
+         System.out.println("路径:" + filesDir.getAbsolutePath());*/
+        File destFile = new File(getFilesDir(), dbName);// 要拷贝的目标地址
+
+        try{
+            InputStream in = getAssets().open(dbName);
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+
+
+        if (destFile.exists()) {
+            System.out.println("数据库" + dbName + "已存在!");
+            return;
+        }
+
+        FileOutputStream out = null;
+        InputStream in = null;
+
+        try {
+            in = getAssets().open(dbName);
+            out = new FileOutputStream(destFile);
+
+            int len = 0;
+            byte[] buffer = new byte[1024];
+
+            while ((len = in.read(buffer)) != -1) {
+                out.write(buffer, 0, len);
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                in.close();
+                out.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
 
     class HomeAdapter extends BaseAdapter {
 

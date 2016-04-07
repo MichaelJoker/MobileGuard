@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColor">@color/textColorPrimary</item>
     </style>
 
     <style name="TitleStyle">
@@ -16,6 +18,15 @@
         <item name="android:textColor">@color/textColorPrimary</item>
         <item name="android:textSize">22sp</item>
     </style>
+
+    <!-- ToolBar菜单样式 -->
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.ActionBar">
+        <item name="actionMenuTextColor">@color/textColorPrimary</item> <!--  敲定颜色-->
+        <item name="android:textSize">18sp</item> <!--  搞掂字体大小-->
+    </style>
+
+
+
 
     <style name="ContentStyle">
         <item name="android:layout_width">wrap_content</item>
