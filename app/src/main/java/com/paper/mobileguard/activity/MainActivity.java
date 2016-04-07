@@ -3,10 +3,12 @@ package com.paper.mobileguard.activity;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -91,6 +93,11 @@ public class MainActivity extends AppCompatActivity{
                         startActivity(new Intent(MainActivity.this,
                                TaskManagerActivity.class));
                         break;
+                    case 4:
+                        // 流量统计
+                        startActivity(new Intent(MainActivity.this,
+                                TracfficManagerActivity.class));
+                        break;
                     case 7:
                         // 高级工具
                         startActivity(new Intent(MainActivity.this,
@@ -116,7 +123,7 @@ public class MainActivity extends AppCompatActivity{
 //        toolbar.setTitle("WaKaKa");
         // Sub Title
 //        toolbar.setSubtitle("Sub title");
-//        toolbar.setOverflowIcon(getResources().getDrawable((R.mipmap.more));
+        toolbar.setOverflowIcon(ContextCompat.getDrawable(MainActivity.this,R.mipmap.more));
         setSupportActionBar(toolbar);
 
         //导航按钮
