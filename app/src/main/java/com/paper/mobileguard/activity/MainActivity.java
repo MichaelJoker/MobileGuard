@@ -3,7 +3,6 @@ package com.paper.mobileguard.activity;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -29,7 +28,6 @@ import android.widget.Toolbar;
 
 import com.paper.mobileguard.R;
 import com.paper.mobileguard.utils.MD5Utils;
-import com.paper.mobileguard.utils.PasswordUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -67,6 +65,7 @@ public class MainActivity extends AppCompatActivity{
 
 
         copyDB("address.db");// 拷贝归属地查询数据库
+        copyDB("antivirus.db");// 拷贝病毒数据库
 
         // 设置监听
         gvHome.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity{
                     case 1:
                         // 通讯卫士
                         startActivity(new Intent(MainActivity.this,
-                                CallSafeActivity2.class));
+                                CallSafeActivity.class));
                         break;
                     case 2:
                         // 软件管理
@@ -97,6 +96,16 @@ public class MainActivity extends AppCompatActivity{
                         // 流量统计
                         startActivity(new Intent(MainActivity.this,
                                 TracfficManagerActivity.class));
+                        break;
+                    case 5:
+                        // 手机杀毒
+                        startActivity(new Intent(MainActivity.this,
+                                AntivirusActivity.class));
+                        break;
+                    case 6:
+                        // 缓存清理
+                        startActivity(new Intent(MainActivity.this,
+                                CleanCache2Activity.class));
                         break;
                     case 7:
                         // 高级工具

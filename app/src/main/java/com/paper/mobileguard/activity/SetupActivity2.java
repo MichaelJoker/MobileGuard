@@ -38,9 +38,6 @@ public class SetupActivity2 extends BaseSetupActivity {
             @Override
             public void onClick(View v) {
                 if (sivSim.isChecked()) {
-                    sivSim.setChecked(false);
-                    mPref.edit().remove("sim").commit();// 删除已绑定的sim卡
-                } else {
                     sivSim.setChecked(true);
                     // 保存sim卡信息
                     TelephonyManager tm = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
@@ -48,6 +45,11 @@ public class SetupActivity2 extends BaseSetupActivity {
                     System.out.println("sim卡序列号:" + simSerialNumber);
 
                     mPref.edit().putString("sim", simSerialNumber).commit();// 将sim卡序列号保存在sp中
+
+
+                } else {
+                    sivSim.setChecked(false);
+                    mPref.edit().remove("sim").commit();// 删除已绑定的sim卡
                 }
             }
         });
